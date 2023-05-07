@@ -1,13 +1,13 @@
 const { Thought, User } = require("../models");
 
 module.exports = {
-  // Get all thoughts
+
   getThoughts(req, res) {
     Thought.find()
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
-  // Get a thought
+
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
       .select("-__v")
@@ -18,7 +18,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // Create a thought
+
   createThought(req, res) {
     Thought.create(req.body)
       .then((thought) => {
@@ -46,7 +46,7 @@ module.exports = {
         return res.status(500).json(err);
       });
   },
-  // Delete a thought
+
   deleteThought(req, res) {
     Thought.findOneAndDelete({_id:req.params.thoughtId})
       .then((thought) => {
@@ -74,7 +74,6 @@ module.exports = {
         return res.status(500).json(err);
       });
   },
-  // Update a thought
   updateThought(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -114,7 +113,7 @@ module.exports = {
         !user
           ? res
               .status(404)
-              .json({ message: 'No user found with that ID :(' })
+              .json({ message: 'That user has no ID' })
           : res.json(user)
       )
       .catch((err) => res.status(500).json(err));

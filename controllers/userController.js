@@ -3,7 +3,7 @@ const { User, Thought } = require('../models');
 
   
 module.exports = {
-  // Get all users
+  // populates all the users
   getUsers(req, res) {
     User.find()
       .then(async (users) => {
@@ -18,7 +18,7 @@ module.exports = {
         return res.status(500).json(err);
       });
   },
-  // Get a single user
+  // Populates just a single user
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
       .select('-__v')
@@ -36,13 +36,13 @@ module.exports = {
         return res.status(500).json(err);
       });
   },
-  // create a new user
+  // Ability to create a user
   createUser(req, res) {
     User.create(req.body)
       .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
-  // Delete a user and remove them from the site
+  // Permanently deletes user and his data
   deleteUser(req, res) {
     User.findOneAndRemove({ _id: req.params.userId })
       .then((user) =>
@@ -61,7 +61,7 @@ module.exports = {
       });
   },
 
-  // Add an thought to a user
+  // Ability to add a thought of a user
   updateUser(req, res) {
     console.log('You are adding a thought');
     console.log(req.body);
@@ -79,7 +79,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // Remove friend from a user
+  // User ability to remove friend
   removeFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
