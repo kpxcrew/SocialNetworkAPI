@@ -14,7 +14,7 @@ const reactionSchema = new Schema(
     reactionBody: {
       type: String,
       required: true,
-      maxlength: 280, 
+      maxlength: 300, 
     },
     createdAt: {
         type: Date,
